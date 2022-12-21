@@ -7,7 +7,7 @@
 .bodyConAside{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-template-rows: 100px 300px 1fr 1fr 100px;
+    grid-template-rows: 100px 300px 1fr 1fr auto;
     grid-template-areas: "nav    nav    nav    nav"
                          "header header header header"
                          "main   main   main   aside"
@@ -17,7 +17,7 @@
 
 @media(max-width: 576px){
     .bodyConAside{
-        grid-template-rows: 100px 300px auto auto 100px;
+        grid-template-rows: 100px 300px auto auto auto;
         grid-template-areas: "nav    nav    nav    nav"
                              "header header header header"
                              "main   main   main   main"
@@ -29,7 +29,7 @@
 .bodySinAside{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-template-rows: 100px 300px 1fr 100px;
+    grid-template-rows: 100px 300px 1fr auto;
     grid-template-areas: "nav    nav    nav    nav"
                          "header header header header"
                          "main   main   main   main"
@@ -194,6 +194,9 @@ footer{
 
 .formulario{
     background-color: #afbf34;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 10px;
     color: white;
     padding: 30px;
     margin-bottom: 10px;
@@ -205,8 +208,28 @@ footer{
                           "nameApellido email"
                           "tel          asunto"
                           "mensaje      mensaje"
-                          "button       button";
+                          "button       button"
 }
+
+@media(max-width:800px){
+    .formulario{
+        width: 100%;
+        margin: 20px 0px;
+        border-radius: 0px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 60px;
+        grid-template-areas:  "Título       Título"
+                              "nameApellido nameApellido"
+                              "Email        Email"
+                              "Tel          Tel"
+                              "asunto       asunto"
+                              "mensaje      mensaje"
+                              "button       button"
+    }
+}
+
+
+
 .formulario h2{
     grid-area: Título;
 }
@@ -231,8 +254,14 @@ footer{
     grid-area: mensaje;
 }
 
-.formulario button :nth-child(7){
+.formulario button{
     grid-area: button;
+    width: 150px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    color:#afbf34;
+    margin-top: 20px;
 }
 
 .formulario label{
@@ -240,9 +269,52 @@ footer{
     flex-direction: column;
 }
 
-.formulario label input{
+.formulario label input , .fomulario label textarea{
     background-color: transparent;
     border: 0;
     border-bottom: 1px solid white;
     margin-top: 10px;
+    outline: none;
+    color: white;
 }
+.loading{
+    width: 100vw;
+    height: 100vh;
+    background-color: #bfbf345d;
+    position: fixed;
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading i{
+    color: white;
+    font-size: 64px;
+    animation-name: rotar;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotar {
+    0%{
+        transform: rotateZ(0deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+
+footer{
+    color: white;
+
+}
+
+footer .compania{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
